@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Topbar from "./components/Navbar.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ApplicationDetail from "./pages/ApplicationDetail.jsx";
+import { api } from "./api.js";
 
 function RequireAuth({ authed, children }) {
    const location = useLocation();
@@ -18,17 +19,41 @@ export default function App() {
    const [token, setToken] = useState(
       () => localStorage.getItem("token") || ""
    );
-
+   const [user, setUser] = useState(null);
    const isAuthed = !!token;
+
+   useEffect(() => {
+      async function loadUser() {
+         if (!token) {
+            setUser(null);
+            return;
+         }
+         try {
+            const u = await api.me(token);
+            setUser(u);
+         } catch {
+            setUser(null);
+            localStorage.removeItem("token");
+            setToken("");
+         }
+      }
+      loadUser();
+   }, [token]);
 
    function handleLogin(nextToken) {
       localStorage.setItem("token", nextToken);
       setToken(nextToken);
    }
 
+   function handleLogout() {
+      localStorage.removeItem("token");
+      setToken("");
+      setUser(null);
+   }
+
    return (
       <div className='d-flex flex-column min-vh-100'>
-         <Topbar />
+         <Topbar user={user} onLogout={handleLogout} />
          <Routes>
             <Route
                path='/login'
