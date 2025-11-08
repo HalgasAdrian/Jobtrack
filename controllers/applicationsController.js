@@ -72,11 +72,12 @@ export const updateApplication = async (req, res) => {
   const userId = req.user.id;
   const applicationId = req.params.id;
 
-  const { company, role, submittedAt, url, notes } = req.body;
+  const { company, role, submittedAt, url, notes, status } = req.body;
   const updateData = {
     company: company ? company : "unknown",
     role: role ? role : "",
     submittedAt: submittedAt ? submittedAt : Date.now(),
+    status: status ? status : "applied",
     url,
     notes,
     updateAt: Date.now(),
