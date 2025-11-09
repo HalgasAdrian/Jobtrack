@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 import Topbar from "./components/Navbar.jsx";
 import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
@@ -14,6 +15,11 @@ function RequireAuth({ authed, children }) {
   }
   return children;
 }
+
+RequireAuth.propTypes = {
+  authed: PropTypes.bool.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default function App() {
   const [token, setToken] = useState(() => localStorage.getItem("token") || "");

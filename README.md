@@ -2,7 +2,7 @@
 
 A comprehensive full-stack web application designed for job seekers to track applications and prepare for interviews through a community-driven question bank with AI-powered mock answers.
 
-![JobTrack Dashboard](./docs/screenshots/dashboard.png)
+![JobTrack Dashboard](./docs/image.png)
 
 ## 📋 Project Information
 
@@ -56,12 +56,12 @@ This project demonstrates modern full-stack development using the MERN stack (Mo
 
 ### Dashboard
 
-![Application Dashboard](./docs/screenshots/dashboard.png)
+![Application Dashboard](./docs/image2.png)
 _Track all your job applications in one organized view_
 
 ### Application Detail
 
-![Edit Application](./docs/screenshots/edit-application.png)
+![Edit Application](./docs/image.png)
 _Update application status and add detailed notes_
 
 ### Interview Questions Hub
