@@ -50,6 +50,25 @@ export const api = {
     return handleJsonResponse(res);
   },
 
+  profile: {
+    async update(token, input) {
+      const res = await fetch("/api/auth/me", {
+        method: "PUT",
+        headers: authHeaders(token),
+        body: JSON.stringify(input),
+      });
+      return handleJsonResponse(res);
+    },
+    async updatePassword(token, input) {
+      const res = await fetch("/api/auth/me/password", {
+        method: "PUT",
+        headers: authHeaders(token),
+        body: JSON.stringify(input),
+      });
+      return handleJsonResponse(res);
+    },
+  },
+
   applications: {
     async list(token) {
       const res = await fetch("/api/applications", {

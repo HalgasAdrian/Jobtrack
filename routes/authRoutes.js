@@ -1,5 +1,11 @@
 import express from "express";
-import { login, register, getUser } from "../controllers/authController.js";
+import {
+  login,
+  register,
+  getUser,
+  updateUser,
+  updatePassword,
+} from "../controllers/authController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
@@ -7,9 +13,10 @@ const router = express.Router();
 // public routes
 router.post("/register", register);
 router.post("/login", login);
-// router.post("/logout", logout);
 
-// protected route (get user's profile)
+// protected routes
 router.get("/me", authMiddleware, getUser);
+router.put("/me", authMiddleware, updateUser);
+router.put("/me/password", authMiddleware, updatePassword);
 
 export default router;

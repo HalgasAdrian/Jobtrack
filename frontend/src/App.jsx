@@ -6,6 +6,7 @@ import Login from "./pages/Login.jsx";
 import Register from "./pages/Register.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
 import ApplicationDetail from "./pages/ApplicationDetail.jsx";
+import Profile from "./pages/Profile.jsx";
 import { api } from "./api.js";
 
 function RequireAuth({ authed, children }) {
@@ -99,6 +100,14 @@ export default function App() {
             element={
               <RequireAuth authed={isAuthed}>
                 <ApplicationDetail token={token} />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <RequireAuth authed={isAuthed}>
+                <Profile token={token} />
               </RequireAuth>
             }
           />

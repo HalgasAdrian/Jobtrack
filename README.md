@@ -29,7 +29,9 @@ This project demonstrates modern full-stack development using the MERN stack (Mo
 - Secure user registration with password hashing (bcrypt)
 - JWT-based authentication and session management
 - Protected routes and API endpoints
-- User profile management
+- User profile management with update capabilities
+- Change password with current password verification
+- Email and username uniqueness validation
 
 ### Private Application Tracker (Arvind)
 
@@ -183,7 +185,8 @@ Project 3 - JobTrack/
 │   │   │   ├── Login.jsx   # Login page
 │   │   │   ├── Register.jsx # Registration page
 │   │   │   ├── Dashboard.jsx # Application list
-│   │   │   └── ApplicationDetail.jsx # Edit application
+│   │   │   ├── ApplicationDetail.jsx # Edit application
+│   │   │   └── Profile.jsx # User profile settings
 │   │   ├── api.js          # API client functions
 │   │   ├── App.jsx         # Main app component
 │   │   └── main.jsx        # React entry point
@@ -208,6 +211,8 @@ Project 3 - JobTrack/
 - `POST /api/auth/register` - Register new user
 - `POST /api/auth/login` - Login and receive JWT token
 - `GET /api/auth/me` - Get current user profile (protected)
+- `PUT /api/auth/me` - Update user profile (protected)
+- `PUT /api/auth/me/password` - Change password (protected)
 
 ### Applications (Arvind)
 

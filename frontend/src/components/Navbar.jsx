@@ -1,6 +1,6 @@
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { FiBriefcase, FiLogOut } from "react-icons/fi";
+import { FiBriefcase, FiLogOut, FiUser } from "react-icons/fi";
 import PropTypes from "prop-types";
 import "../css/Navbar.css";
 
@@ -21,6 +21,11 @@ export default function Topbar({ user, onLogout }) {
             <Nav.Link as={NavLink} to="/dashboard" end>
               Dashboard
             </Nav.Link>
+            {user && (
+              <Nav.Link as={NavLink} to="/profile" end>
+                Profile
+              </Nav.Link>
+            )}
           </Nav>
           <div className="d-flex align-items-center gap-3">
             {user ? (
