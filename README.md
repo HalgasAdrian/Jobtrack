@@ -354,6 +354,36 @@ Email: arief.z@northeastern.edu
 Northeastern University  
 Email: parekh.arv@northeastern.edu
 
+## 🤖 GenAI Usage
+
+This project utilized generative AI tools to assist with documentation and content generation:
+
+### Models & Tools Used
+
+- **Claude 3.5 Sonnet** (Latest version)
+- **Claude 4.5 Haiku** (for specific code review tasks)
+
+### Use Cases & Prompts
+
+**README.md Generation**
+
+- Prompt: "Create a comprehensive README following the structure of a professional MERN stack project"
+- Purpose: Generate well-structured documentation including installation steps, API endpoints, tech stack details, and project overview
+- Output: Professional README with clear sections, instructions, and technical details
+
+**Design Document Creation**
+
+- Prompt: "Write a detailed design document with user personas, user stories, and feature specifications for a job tracking application"
+- Purpose: Develop comprehensive project specification with acceptance criteria and implementation details
+- Output: Complete design document with personas, user stories, and technical requirements
+
+### How AI Was Utilized
+
+- Content generation for documentation structure and technical descriptions
+- Assistance with organizing information logically and clearly
+- Proofreading and refinement of technical explanations
+- Consistent tone and professional presentation across documents
+
 ## 🙏 Acknowledgments
 
 - [Bootstrap](https://getbootstrap.com/) and [React Bootstrap](https://react-bootstrap.github.io/) for UI components
@@ -361,6 +391,7 @@ Email: parekh.arv@northeastern.edu
 - [Vite](https://vitejs.dev/) for lightning-fast development experience
 - MongoDB for database solution
 - Northeastern University CS5610 course staff and Professor John Alexis Guerra Gomez
+- Claude AI models for documentation assistance
 
 ---
 
