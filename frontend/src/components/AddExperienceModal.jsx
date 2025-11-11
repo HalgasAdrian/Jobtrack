@@ -6,7 +6,7 @@ export default function AddExperienceModal({
                                                show,
                                                onClose,
                                                onSubmit,
-                                               initialData = null, // ✅ optional prop for editing
+                                               initialData = null,
                                            }) {
     const [form, setForm] = useState({
         company: "",
@@ -18,7 +18,7 @@ export default function AddExperienceModal({
     });
     const [error, setError] = useState("");
 
-    // ✅ Prefill fields if editing
+    
     useEffect(() => {
         if (initialData) {
             setForm({
@@ -48,7 +48,11 @@ export default function AddExperienceModal({
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const userEmail = localStorage.getItem("userEmail");
+            // ✅ Safe localStorage access
+            const userEmail = typeof window !== 'undefined' && window.localStorage
+                ? localStorage.getItem("userEmail")
+                : null;
+            
             await onSubmit({ ...form, userEmail });
             setError("");
             onClose();
