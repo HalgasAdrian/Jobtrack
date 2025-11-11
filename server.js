@@ -1,32 +1,59 @@
 import express from "express";
-import authRoutes from "./routes/authRoutes.js";
-import applicationRoutes from "./routes/applicationRoutes.js";
 import dotenv from "dotenv";
-import { MongoClient } from "mongodb";
+import { connectDB } from "./db/connect.js"; // new helper
+import authRoutes from "./routes/authRoutes.js";
+import questionsRoutes from "./routes/questionsRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
+import companyRoutes from "./routes/companyRoutes.js";
 
 dotenv.config();
 
 const app = express();
+const PORT = process.env.PORT || 3000;
+
+
+
 app.use(express.json());
-app.use(express.static("./frontend/dist"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("./frontend/dist")); // serve React build later
+app.use("/api/companies", companyRoutes);
 
-// mongodb setup
-const MONGO_URI = process.env.MONGO_URI;
-const client = new MongoClient(MONGO_URI);
-client.connect();
-const db = client.db("jobtrack");
-console.log("Mongodb connected!");
-
-// attach db to every req
+// --- CORS fix (manual, no external package) ---
 app.use((req, res, next) => {
-  req.db = db;
-  next();
+    res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    next();
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/applications", applicationRoutes);
 
-app.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+async function startServer() {
+    try {
+        const db = await connectDB(); // connect to Mongo once
+        console.log("Database ready, starting server...");
+
+
+        app.use((req, res, next) => {
+            req.db = db;
+            next();
+        });
+
+        app.use("/api/auth", authRoutes);
+        app.use("/api/questions", questionsRoutes);
+        app.use("/api/applications", applicationRoutes);
+        app.use("/api/companies", companyRoutes);
+
+
+        app.get("/api/health", (req, res) => {
+            res.json({ status: "ok", database: "connected" });
+        });
+
+        app.listen(PORT, () => {
+            console.log(`Server running on port ${PORT}`);
+        });
+    } catch (error) {
+        console.error("Server startup failed:", error);
+    }
+}
+
+startServer();

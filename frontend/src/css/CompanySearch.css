@@ -1,0 +1,36 @@
+.company-search-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.company-search-form {
+    display: inline-flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.company-input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 250px;
+}
+
+.search-btn {
+    padding: 0.5rem 1rem;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background-color: #0b5ed7;
+}
+
+.error-msg {
+    color: red;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+}

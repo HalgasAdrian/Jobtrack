@@ -1,6 +1,6 @@
-# JobTrack - Personal Job Application Tracker & AI Interview Hub
+# JobTrack - Personal Job Application Tracker
 
-A comprehensive full-stack web application designed for job seekers to track applications and prepare for interviews through a community-driven question bank with AI-powered mock answers.
+A comprehensive full-stack web application designed for job seekers to track applications and prepare for interviews.
 
 ![JobTrack Dashboard](./docs/image.png)
 
@@ -47,12 +47,6 @@ This project demonstrates modern full-stack development using the MERN stack (Mo
 - **Company & Role Tags**: Organize questions by employer and position
 - **Search & Filter**: Find questions by company, role, or keyword
 - **Community Knowledge Base**: Learn from real interview experiences
-
-### AI-Powered Mock Answers (Zoya)
-
-- **One-Click Generation**: Get AI-generated answers for any question
-- **Practice Tool**: Study structured responses and improve interview skills
-- **Real-time Response**: Loading indicators and error handling
 
 ## 📸 Screenshots
 

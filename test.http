@@ -1,0 +1,28 @@
+### Add Question
+POST http://localhost:3000/api/questions
+Content-Type: application/json
+
+{
+  "company": "Bloomberg",
+  "role": "SWE Intern",
+  "question": "Explain BFS and DFS difference.",
+  "tags": ["coding", "graph"],
+  "date": "2025-11-09"
+}
+
+### Get Questions
+GET http://localhost:3000/api/questions?company=Bloomberg
+
+### Get Single Question
+GET http://localhost:3000/api/questions/6910cd409e3145518290a0dd
+
+### Update Question
+PUT http://localhost:3000/api/questions/6910cd409e3145518290a0dd
+Content-Type: application/json
+
+{
+  "question": "Explain BFS vs DFS with an example."
+}
+
+### Delete Question
+DELETE http://localhost:3000/api/questions/6910cd409e3145518290a0dd

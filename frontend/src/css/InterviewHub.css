@@ -1,0 +1,45 @@
+.interview-hub-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.hub-main {
+    display: flex;
+    gap: 2rem;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+.company-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border-radius: 12px;
+}
+.company-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.company-card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    background: #fff;
+}
+
+.company-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.company-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    padding: 8px;
+}

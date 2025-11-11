@@ -1,0 +1,190 @@
+:root {
+    --primary: #007bff;
+}
+
+.interview-layout {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    min-height: 70vh;
+}
+
+/* LEFT PANEL */
+.interview-list {
+    background: var(--bg-light, #f8f9fa);
+    border-radius: 12px;
+    padding: 1rem;
+    overflow-y: auto;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.interview-item {
+    padding: 0.8rem 1rem;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+    background: white;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.interview-item:hover {
+    border-color: var(--primary);
+    background: #f3f6ff;
+}
+
+.interview-item.active {
+    background: #eaf2ff;
+    border-color: var(--primary);
+}
+
+.question-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.2rem;
+}
+
+.role-label {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+/* RIGHT PANEL */
+.interview-detail {
+    flex: 1;
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+/* ✅ Top-right Edit/Delete Buttons */
+.top-action-buttons {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.action-btn {
+    font-size: 0.85rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+}
+
+.edit-btn {
+    color: #374151;
+    border-color: #d1d5db;
+}
+
+.edit-btn:hover {
+    background: #f1f5f9;
+}
+
+.delete-btn {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background: #dc3545;
+    color: #fff;
+}
+
+/* Tabs */
+.tab-header {
+    display: flex;
+    gap: 1rem;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 1rem;
+    margin-top: 2.5rem; /* space for top buttons */
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 0.6rem 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #6c757d;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s;
+}
+
+.tab-btn.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
+/* Question details */
+.question-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.role-info,
+.difficulty {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* Placeholder */
+.placeholder {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #6c757d;
+    font-size: 1.05rem;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    min-height: 300px;
+}
+
+.placeholder p {
+    margin: 0;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* small top-right action buttons */
+.interview-detail { position: relative; }
+.top-action-buttons {
+    position: absolute;
+    right: 1.25rem;
+    top: 1.25rem;
+    display: flex;
+    gap: 0.25rem;
+}
+.action-btn {
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 6px 8px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.action-btn.delete-btn { border-color: #e74c3c; color: #e74c3c; }
+.action-btn.edit-btn { border-color: #6c8ef0; color: #3b6ef0; }
+

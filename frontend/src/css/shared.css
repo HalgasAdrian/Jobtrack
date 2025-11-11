@@ -110,3 +110,24 @@
   background: linear-gradient(135deg, var(--info-color), #3182ce);
   color: white;
 }
+
+.add-experience-modal .modal-content {
+    border-radius: 16px;
+    padding: 10px 20px;
+}
+
+.add-experience-modal .modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.add-experience-modal textarea {
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.add-experience-modal .form-label {
+    font-weight: 600;
+    color: #333;
+}
+
