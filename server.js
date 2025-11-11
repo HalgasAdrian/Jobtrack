@@ -29,10 +29,8 @@ app.use("/api/companies", companyRoutes);
 // serve React frontend
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const frontendPath = path.resolve(__dirname, "frontend", "dist");
+
 app.use(express.static(frontendPath));
 
 app.get("*", (req, res) => {
