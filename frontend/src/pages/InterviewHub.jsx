@@ -51,7 +51,7 @@ export default function InterviewHub() {
     async function handleSubmit(formData) {
         try {
             const token = localStorage.getItem("token");
-            const res = await fetch("http://localhost:3000/api/questions", {
+            const res = await fetch("/api/questions", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -78,7 +78,7 @@ export default function InterviewHub() {
 
         try {
             const res = await fetch(
-                `http://localhost:3000/api/questions?company=${normalized}`
+                `api/questions?company=${normalized}`
             );
             const data = await res.json();
 
