@@ -9,7 +9,16 @@ export default function QuestionList({ company }) {
     const [selected, setSelected] = useState(null);
     const [activeTab, setActiveTab] = useState("question");
     const [showEditModal, setShowEditModal] = useState(false);
-    const token = localStorage.getItem("token") || "";
+    const [token, setToken] = useState(""); // ✅ Changed to state
+    const [userEmail, setUserEmail] = useState(""); // ✅ Added state for userEmail
+
+    // ✅ Get token and userEmail in useEffect (client-side only)
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            setToken(localStorage.getItem("token") || "");
+            setUserEmail(localStorage.getItem("userEmail") || "");
+        }
+    }, []);
 
     useEffect(() => {
         async function fetchQuestions() {
@@ -122,8 +131,8 @@ export default function QuestionList({ company }) {
                 <div className="interview-detail">
                     {selected ? (
                         <>
-                            {/* top-right small action buttons */}
-                            {selected.userEmail === localStorage.getItem("userEmail") && (
+                            {/* top-right small action buttons - ✅ Use userEmail state */}
+                            {selected.userEmail === userEmail && userEmail && (
                                 <div className="top-action-buttons">
                                     <button className="action-btn edit-btn" onClick={handleEdit}>
                                         ✏️
@@ -161,7 +170,7 @@ export default function QuestionList({ company }) {
                         </>
                     ) : (
                         <div className="placeholder text-center text-muted">
-                            <p>📝 Select a question to view details.</p>
+                            <p>🔍 Select a question to view details.</p>
                         </div>
                     )}
                 </div>
