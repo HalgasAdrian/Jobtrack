@@ -9,8 +9,15 @@ export default function InterviewHub() {
     const [defaultCompanies, setDefaultCompanies] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [hasResults, setHasResults] = useState(true);
-    const isLoggedIn = !!localStorage.getItem("token");
+    const [isLoggedIn, setIsLoggedIn] = useState(false); // ✅ Changed to state
 
+    // ✅ Check login status in useEffect (client-side only)
+    useEffect(() => {
+        if (typeof window !== 'undefined' && window.localStorage) {
+            const token = localStorage.getItem("token");
+            setIsLoggedIn(!!token);
+        }
+    }, []);
 
     useEffect(() => {
         setDefaultCompanies([
@@ -50,7 +57,11 @@ export default function InterviewHub() {
 
     async function handleSubmit(formData) {
         try {
-            const token = localStorage.getItem("token");
+            // ✅ Safe localStorage access
+            const token = typeof window !== 'undefined' && window.localStorage 
+                ? localStorage.getItem("token") 
+                : null;
+            
             const res = await fetch("/api/questions", {
                 method: "POST",
                 headers: {
