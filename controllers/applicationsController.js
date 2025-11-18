@@ -15,7 +15,9 @@ export const createApplication = async (req, res) => {
       url,
       notes,
       createdAt: Date.now(),
-      updateAt: Date.now(),
+      // maintain a consistent field name (`updatedAt`) instead of the typo `updateAt`
+      // to simplify querying and sorting by the last updated time
+      updatedAt: Date.now(),
     };
 
     const newApp = await applications.insertOne(newApplication);
@@ -80,7 +82,9 @@ export const updateApplication = async (req, res) => {
     status: status ? status : "applied",
     url,
     notes,
-    updateAt: Date.now(),
+    // set `updatedAt` consistently (instead of `updateAt`) so callers can
+    // sort or filter applications by the last updated timestamp
+    updatedAt: Date.now(),
   };
 
   try {
