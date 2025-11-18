@@ -36,7 +36,9 @@ export const register = async (req, res) => {
       password: passwordHash,
       createdAt: Date.now(),
     });
-    return res.status(200).json({ message: "User registered successfully!" });
+    // Return a `201 Created` response according to HTTP semantics to indicate
+    // that a new user record was successfully created in the database.
+    return res.status(201).json({ message: "User registered successfully!" });
   } catch (error) {
     console.log("Error registering user: ", error);
     res.status(500).json({ message: error.message });
@@ -48,15 +50,17 @@ export const login = async (req, res) => {
     const db = req.db;
     const users = db.collection("users");
 
-    const { identifer, password } = req.body;
+    // Accept either an email or username under the `identifier` field. The
+    // previous implementation used a misspelled `identifer`, which could lead to confusion.
+    const { identifier, password } = req.body;
     const user = await users.findOne({
-      $or: [{ email: identifer }, { username: identifer }],
+      $or: [{ email: identifier }, { username: identifier }],
     });
 
     if (!user) {
       return res
         .status(400)
-        .json({ message: "User with this identifer does not exist!" });
+        .json({ message: "User with this identifier does not exist!" });
     }
 
     const isPassMatch = await bcrypt.compare(password, user.password);
@@ -64,7 +68,12 @@ export const login = async (req, res) => {
       return res.status(400).json({ message: "The password is incorrect! " });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
+    // Include both the user ID and email in the JWT payload.  Persisting the
+    // email allows the middleware to attach it to `req.user` for ownership
+    // verification when editing or deleting interview questions.  Note: tokens
+    // are still used here but the design calls for express-session, this
+    // addition at least enables proper user scoping until sessions are adopted.
+    const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
