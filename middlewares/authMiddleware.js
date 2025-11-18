@@ -12,8 +12,12 @@ export const authMiddleware = async (req, res, next) => {
   const authToken = authHeader.split(" ")[1];
   try {
     const decoded = jwt.verify(authToken, process.env.JWT_SECRET);
+    // attach both id and email if present in the JWT payload.  Including the
+    // email here enables routes (like the interview questions endpoints) to
+    // perform ownership checks without another database lookup.
     req.user = {
       id: decoded.id,
+      email: decoded.email,
     };
     next();
   } catch (error) {
