@@ -1,14 +1,15 @@
 // routes/companyRoutes.js
 import express from "express";
-import { connectDB } from "../db/connect.js";
+// Use `req.db` provided by the server instead of opening a new connection.
+// This avoids the overhead of reconnecting to MongoDB on every request and
+// ensures proper connection pooling.
 
 const router = express.Router();
 
 // GET /api/companies
 router.get("/", async (req, res) => {
     try {
-        const db = await connectDB();
-        const questionsCollection = db.collection("questions");
+        const questionsCollection = req.db.collection("questions");
 
         const companies = await questionsCollection
             .aggregate([
@@ -30,10 +31,10 @@ router.get("/", async (req, res) => {
 
         const withLogos = companies.map((c) => ({
             ...c,
+            // generate a simple placeholder logo path or keep existing clearbit call
             logo: `https://logo.clearbit.com/${c.name.toLowerCase()}.com`,
         }));
-
-        res.status(200).json(withLogos);
+        return res.status(200).json(withLogos);
     } catch (err) {
         console.error("Error fetching companies:", err);
         res
