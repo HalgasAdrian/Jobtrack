@@ -14,19 +14,32 @@ const router = express.Router();
 router.post("/", authMiddleware, async (req, res) => {
     try {
         const db = req.db;
-        const question = req.body || {};
-
-        // Ensure required fields exist (company and questionTitle at least)
-        if (!question.company || !question.questionTitle) {
+        const payload = req.body || {};
+        // Basic validation: require `company` and `questionTitle` to be present.
+        // Without validation malicious users could insert unexpected fields.
+        if (!payload.company || !payload.questionTitle) {
             return res.status(400).json({ error: "company and questionTitle required" });
         }
-
-        // Attach server-controlled metadata
-        question.userEmail = req.user?.email || null;
-        question.createdAt = Date.now();
-
-        const result = await db.collection("questions").insertOne(question);
-        res.status(201).json({ insertedId: result.insertedId });
+        if (!req.user || !req.user.email) {
+            // When the JWT doesn't contain an email we cannot set ownership, so we fail fast.
+            return res.status(401).json({ error: "Authentication required" });
+        }
+        // Build a new question object and only copy over fields we intend to store.
+        // This whitelisting approach avoids accidentally persisting extra properties
+        // sent from the client (e.g. an attempt to set `userEmail`).
+        const newQuestion = {
+            company: String(payload.company),
+            role: payload.role ? String(payload.role) : undefined,
+            questionTitle: String(payload.questionTitle),
+            questionDescription: payload.questionDescription ? String(payload.questionDescription) : undefined,
+            difficulty: payload.difficulty ? String(payload.difficulty) : undefined,
+            tips: payload.tips ? String(payload.tips) : undefined,
+            tags: Array.isArray(payload.tags) ? payload.tags.map(String) : undefined,
+            userEmail: req.user.email,
+            createdAt: Date.now(),
+        };
+        const result = await db.collection("questions").insertOne(newQuestion);
+        return res.status(201).json({ insertedId: result.insertedId });
     } catch (err) {
         console.error("Failed to create question:", err);
         res.status(500).json({ error: "Failed to add a question" });
