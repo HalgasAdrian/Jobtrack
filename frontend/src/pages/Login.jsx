@@ -9,17 +9,20 @@ import "../css/Login.css";
 
 export default function Login({ onLogin }) {
     const navigate = useNavigate();
-    const [identifer, setIdentifer] = useState("");
+    // Use `identifier` instead of the misspelled `identifer` used previously. This
+    // matches the backend and improves code readability.
+    const [identifier, setIdentifier] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    async function handleSubmit(e) {
+        async function handleSubmit(e) {
         e.preventDefault();
         setError("");
         setLoading(true);
         try {
-            const res = await api.login({ identifer, password });
+                // send identifier instead of mis‑spelled identifer
+                const res = await api.login({ identifier, password });
             const token = res.token;
             if (!token) {
                 setError("No token returned from server");
@@ -70,8 +73,8 @@ export default function Login({ onLogin }) {
                                     <Form.Label>Email or Username</Form.Label>
                                     <Form.Control
                                         type="text"
-                                        value={identifer}
-                                        onChange={(e) => setIdentifer(e.target.value)}
+                                         value={identifier}
+                                            onChange={(e) => setIdentifier(e.target.value)}
                                         placeholder="e.g. jdoe or jdoe@example.com"
                                         required
                                     />
